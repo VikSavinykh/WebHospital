@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TestWebDoctor:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="WebDoctor-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="TestWebDoctor:war exploded" />
+    </root>
+  </artifact>
+</component>

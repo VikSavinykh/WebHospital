@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Регистрации к докторам</title>
+</head>
+<body>
+        <h3><label>Ваши записи к докторам</label></h3>
+
+            <h2 th:if="${@recordService.findAllByPatient(currentUser.user.patient).size() == 0}">У вас ещё нету записей</h2>
+            <th:block th:each="record : ${@recordService.findAllByPatient(currentUser.user.patient)}">
+              <h3 th:text="${record.doctor.specialization.name} + ' - ' + ${record.doctor.fio} + ' - ' + ${T(service.DateUtil).getDateTimeSimpleFormat(record.startVisit)}"></h3>
+            </th:block>
+
+        <form action = "/home/" method = 'GET'>
+            <input type="submit"  value="На главную страницу"/>
+        </form>
+</body>
+</html>

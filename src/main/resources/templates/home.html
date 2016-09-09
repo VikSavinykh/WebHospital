@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Городская облостная больница №666</title>
+</head>
+<body>
+    <h2>ГЛАВНАЯ СТРАНИЦА!</h2>
+    <th:block th:if="${currentUser!=null}">
+        <h2 th:if="${message == null}" th:text="'Вы вошли в систему как ' + ${currentUser.user.logonName} + '!'"></h2>
+        <h2 th:if="${message != null}" th:text="${message}"></h2>
+        <form action = "/record/pick-doctor" method = 'GET'>
+            <input type="submit"  value="Записаться на приём"/>
+        </form>
+        <br/>
+        <form action = "/record/user-records" method = 'GET'>
+            <input type="submit"  value="Список всех записей"/>
+        </form>
+        <br/>
+        <form action = "/logout" method = 'GET'>
+            <input type="submit"  value="Выйти"/>
+        </form>
+    </th:block>
+    <th:block th:if="${currentUser==null}">
+        <h2 th:if="${message == null}">Вы не вошли в систему!</h2>
+        <h2 th:if="${message != null}" th:text="${message}"></h2>
+        <form action = "/login/" method = 'GET'>
+            <input type="submit"  value="Войти"/>
+        </form>
+        <br/>
+        <form action = "/registration/" method = 'GET'>
+            <div><input type="submit" value="Регистрация"/></div>
+        </form>
+    </th:block>
+</body>
+</html>

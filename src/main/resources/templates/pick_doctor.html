@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Выбор доктора и даты</title>
+    </head>
+    <body>
+        <th:block>
+            <h2 th:if="${message == null}"></h2>
+            <h2 th:if="${message != null}" th:text="${message}"></h2>
+        </th:block>
+
+        <h1>Выберите доктора и дату</h1>
+
+        <form action = "/record/pick-doctor" method = 'POST'>
+            <h3><label>Доктор</label></h3>
+            <h3><select name="doctor">
+                <th:block th:each="specialization : ${T(domain.doctor.DoctorSpecialization).values()}">
+                    <optgroup type="text" th:label="${specialization.name}"></optgroup>
+                    <th:block th:each="doctor : ${@doctorService.findAllBySpecialization(specialization)}">
+                        <option type="text" th:value="${doctor.id}" th:text="${doctor.fio}"></option>
+                    </th:block>
+                </th:block>
+            </select></h3>
+            <input type="date" name="dayDate" th:value="${T(service.DateUtil).getDateInSimpleFormat(T(service.DateUtil).getToday())}"/>
+	        <h3><input type="submit"  value="Далее"/></h3>
+	    </form>
+        <br/>
+        <form action = "/home/" method = 'GET'>
+            <input type="submit"  value="На главную страницу"/>
+        </form>
+    </body>
+</html>

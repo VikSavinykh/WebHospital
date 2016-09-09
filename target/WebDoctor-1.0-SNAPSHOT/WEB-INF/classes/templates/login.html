@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Вход</title>
+</head>
+<body>
+    <th:block th:if="${currentUser == null}">
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <div><label> User Name : <input type="text" name="username"/> </label></div>
+            <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div><input type="submit" value="Войти"/></div>
+        </form>
+        <br/>
+        <form action = "/registration/" method = 'GET'>
+            <div><input type="submit" value="Регистрация"/></div>
+        </form>
+    </th:block>
+    <th:block th:if="${currentUser != null}">
+        <h2 th:text="'Вы вошли в систему как ' + ${currentUser.user.logonName}"></h2>
+        <form action = "/logout" method = 'GET'>
+            <input type="submit"  value="Выйти"/>
+        </form>
+        <br/>
+        <form action = "/home/" method = 'GET'>
+            <input type="submit"  value="На главную страницу"/>
+        </form>
+    </th:block>
+</body>
+</html>

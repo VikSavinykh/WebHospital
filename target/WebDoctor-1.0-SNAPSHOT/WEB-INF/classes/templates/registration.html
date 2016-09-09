@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>Регистрация</title>
+    </head>
+
+    <body>
+
+        <form action = "/registration/" method = 'POST'>
+
+            <label>Логин</label>
+            <input type="text" name="logonName"/>
+
+            <br/>
+
+            <label>Пароль</label>
+            <input type="password" name="passwordHash"/>
+
+            <br/>
+
+            <label>ФИО</label>
+            <input type="text" name="patient.fio"/>
+
+            <input type="submit"  value="Зарегистрироваться"/>
+        </form>
+    </body>
+</html>

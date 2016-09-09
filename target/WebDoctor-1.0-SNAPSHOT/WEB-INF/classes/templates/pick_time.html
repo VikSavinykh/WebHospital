@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Выбор времени приёма</title>
+</head>
+<body>
+    <form action = "/record/make-record" method = 'POST'>
+        <h3><label>Выберите время приёма</label></h3>
+        <input type="hidden" name="doctor" th:value="${doctor.id}"/>
+        <h3><select name="visitDate">
+            <th:block th:each="record : ${records}">
+                <option th:if="${!record.busy}" th:value="${T(service.DateUtil).getDateTimeSimpleFormat(record.dayDate)}" th:text="${T(service.DateUtil).getTimeSimpleFormat(record.dayDate)}"></option>
+                <option th:if="${record.busy}" disabled="disabled" th:text="${T(service.DateUtil).getTimeSimpleFormat(record.dayDate)} + ' (Занято)'"></option>
+            </th:block>
+        </select></h3>
+
+        <h3><input type="submit"  value="Записаться"/></h3>
+    </form>
+    <br/>
+    <form action = "/record/pick-doctor" method = 'GET'>
+        <input type="submit"  value="Выбрать другую дату"/>
+    </form>
+</body>
+</html>
